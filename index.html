@@ -1,0 +1,1030 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="CAPS, or the Centre for Academic and Professional Support, is designed for students, educators, and professionals within the CHRIST community who are eager to enhance their academic, scholarly, and professional skills. Whether you are a student striving to excel in your studies, a researcher looking to master advanced writing techniques, or someone seeking guidance on professional communication, CAPS is your go-to resource. Our services cater to a wide range of needs through various modalities, including peer training, one-on-one coaching, e-learning modules, and psychometric assessments.">
+    <meta name="keywords" content="academic support, professional development, student coaching, peer training, writing centre, e-learning, psychometric assessments, scholarly skills, CHRIST University, CAPS, research support, communication skills">
+    <title>CAPS - Home Page</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Dancing+Script:wght@400..700&display=swap" rel="stylesheet">
+
+    <!-- AOS (Animate on Scroll) -->
+	<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+	<script defer src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+	<!-- Leaflet (Map) -->
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
+	<script defer src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
+
+    <style>
+		html {
+			scroll-behavior: smooth;
+		}
+
+		.dm-sans {
+			font-family: "DM Sans", sans-serif;
+		}
+
+		.dancing-script-font {
+			font-family: "Dancing Script", cursive;
+			font-optical-sizing: auto;
+			font-weight: 700;
+			font-style: normal;
+		}
+
+		html {
+			scroll-behavior: smooth;
+		}
+
+		#campus-container {
+			gap: 1rem;
+			overflow-x: auto;
+			padding-bottom: 0.5rem;
+			scroll-snap-type: x mandatory;
+			-webkit-overflow-scrolling: touch;
+			position: relative;
+		}
+
+		.card {
+			scroll-snap-align: start;
+			flex: 0 0 auto;
+			font-family: 'Poppins', sans-serif;
+			width: 100%;
+			max-width: 180px;
+			height: 180px;
+			color: white;
+			background-position: center;
+			background-size: cover;
+			transition: transform 0.4s ease;
+			position: relative;
+		}
+
+		.card .card-content {
+			position: absolute;
+			bottom: -10px;
+			padding: 1rem;
+			width: 100%;
+			left: 0;
+			transition: transform 0.4s ease;
+		}
+
+		.card .card-content h1 {
+			margin: 0;
+			font-size: 1rem;
+		}
+
+		.card:hover {
+			cursor: pointer;
+			transform: scale(0.97);
+		}
+
+		.card:hover .card-content {
+			transform: scale(0.96);
+		}
+
+		.card:active {
+			transform: scale(0.9);
+		}
+
+		/* Responsive adjustments */
+		@media (max-width: 768px) {
+			.card {
+				max-width: 150px;
+				height: 150px;
+			}
+
+			.card .card-content h1 {
+				font-size: 0.875rem;
+			}
+
+			.scroll-indicator-container {
+				display: block;
+				/* Show indicator on mobile */
+			}
+		}
+
+		@media (max-width: 480px) {
+			.card {
+				max-width: 100%;
+				height: auto;
+				aspect-ratio: 4 / 3;
+			}
+
+			.card .card-content {
+				padding: 0.75rem;
+				bottom: 0;
+			}
+
+			.card .card-content h1 {
+				font-size: 0.5rem;
+			}
+		}
+
+
+		@keyframes fadeIn {
+			from {
+				opacity: 0;
+				transform: translateX(-10px);
+			}
+
+			to {
+				opacity: 1;
+				transform: translateX(0);
+			}
+		}
+
+		@keyframes fadeOut {
+			from {
+				opacity: 1;
+				transform: translateX(0);
+			}
+
+			to {
+				opacity: 0;
+				transform: translateX(-10px);
+			}
+		}
+
+		.fade-out {
+			animation: fadeOut 0.5s ease forwards;
+		}
+
+		.marquee {
+			animation: scroll-left linear infinite;
+			animation-duration: 100s;
+		}
+
+		@keyframes scroll-left {
+			0% {
+				transform: translateX(0%);
+			}
+
+			100% {
+				transform: translateX(-100%);
+			}
+		}
+
+		#alumni-carousel {
+			display: flex;
+			width: max-content;
+		}
+
+		#alumni-carousel:hover {
+			animation-play-state: paused;
+		}
+
+		.leaflet-popup-content-wrapper {
+			background-color: #1f2937 !important;
+			color: white !important;
+			border-radius: 0.5rem !important;
+			box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+		}
+
+		.leaflet-popup-tip {
+			background-color: #1f2937 !important;
+		}
+
+        
+        #main {
+            --sb-track-color: #ff9f45;
+            --sb-thumb-color: #0056ff;
+            --sb-size: 4px;
+        }
+
+        #main::-webkit-scrollbar {
+            width: var(--sb-size)
+        }
+
+        #main::-webkit-scrollbar-track {
+            background: var(--sb-track-color);
+            border-radius: 1px;
+        }
+
+        #main::-webkit-scrollbar-thumb {
+            background: var(--sb-thumb-color);
+            border-radius: 4px;
+        
+        }
+
+        @supports not selector(::-webkit-scrollbar) {
+        #main {
+            scrollbar-color: var(--sb-thumb-color)
+                            var(--sb-track-color);
+            }
+        }
+
+        @keyframes scroll {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+		.slider {
+			box-shadow: 0 10px 20px -5px rgba(0, 0, 0, .125);
+			height: 500px;
+			margin: auto;
+			overflow: hidden;
+			position: relative;
+			width: 90%;
+		}
+
+		
+		.slider::after {
+			right: 0;
+			transform: rotateZ(180deg);
+		}
+
+		.slider::before {
+			left: 0;
+		}
+
+		.slide-track {
+			display: flex;
+			width: max-content;
+			animation: scroll 60s linear infinite;
+		}
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }               
+        }
+
+        .blink {
+            animation: blink 2s infinite;
+        }
+	</style>
+</head>
+<body>
+    <!-- Navbar -->
+	<nav class="bg-gray-900/30 dm-sans backdrop-blur-[30px] border-gray-700 border-b fixed top-0 w-full z-[999999]">
+		<div class="max-w-screen-2xl flex flex-wrap items-center justify-between mx-auto p-4">
+			<a id="logo" href="https://caps.christuniversity.in/caps" class="flex items-center h-8 space-x-3 transition-all duration-500 hover:scale-105"></a>
+
+			<div class="flex items-center justify-center">
+				<button
+					class="menu-toggle flex items-center justify-center gap-2 text-white py-2 px-4 rounded-xl transition-all duration-300 transform hover:scale-105">
+					<ion-icon class="text-2xl" name="menu-outline"></ion-icon>
+					<span>Menu</span>
+				</button>
+			</div>
+		</div>
+	</nav>
+
+    <div id="loading-screen" class="absolute inset-0 bg-blue-900 flex justify-center items-center z-20 transition-opacity duration-500">
+        <div class="w-full flex flex-wrap items-center justify-center text-center gap-2 px-2">
+            <span class="w-4 h-4 sm:w-5 sm:h-5 bg-[#20315f] rounded-full blink" style="animation-delay: 0.1s;"></span>
+            <span class="w-4 h-4 sm:w-5 sm:h-5 bg-[#32599a] rounded-full blink" style="animation-delay: 0.3s;"></span>
+            <span class="w-4 h-4 sm:w-5 sm:h-5 bg-[#6b86b1] rounded-full blink" style="animation-delay: 0.5s;"></span>
+            <span class="w-4 h-4 sm:w-5 sm:h-5 bg-[#efe2d2] rounded-full blink" style="animation-delay: 0.7s;"></span>
+            <span class="w-4 h-4 sm:w-5 sm:h-5 bg-[#bb8d2f] rounded-full blink" style="animation-delay: 0.9s;"></span>
+            <p class="text-[#fbfbfb] font-serif italic text-sm sm:text-base md:text-xl">Optimizing Learning and Harnessing Expertise</p>
+        </div>
+    </div>
+
+    <section id="main" class="h-screen overflow-y-auto md:snap-y md:snap-mandatory overflow-hidden">
+        <!-- Hero Section -->
+        <div id="home" class="bg-[url('https://drive.google.com/thumbnail?id=1NOnzedKMFzQHoXSEXM0hHR0phPbFhRSX&sz=s800')] bg-center bg-cover shadow-[inset_1200px_-1000px_200px_rgba(0,0,0,0.5)] min-h-screen w-full md:snap-start pt-24 px-4 sm:px-6 md:px-16 lg:px-24 xl:px-32 text-white">
+            <img class="w-40 sm:w-60 md:w-64 lg:w-[260px] fade-in"
+			src="https://drive.google.com/thumbnail?id=1EurCCG3ucgcsmKBF4Rkcd2sGjlsKIYOE&sz=s800" data-aos="zoom-in"
+			loading="lazy" data-aos-delay="200" data-aos-duration="1000" />
+
+            <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 w-full"
+			data-aos="fade-up" data-aos-duration="200" data-aos-delay="300">
+
+			<!-- Left Text -->
+			<div class="w-full md:w-1/2 border-b-2 md:border-b-0 border-white md:border-r-2 pb-6 md:pb-0 md:pr-10">
+				<p class="text-sm sm:text-base md:text-sm lg:text-base leading-relaxed dm-sans">
+					The Centre for Academic and Professional Support (CAPS) at Christ University fosters students’
+					holistic growth
+					by offering training, mentoring, peer support and co‑curricular activities. It equips learners with
+					academic,
+					professional and life skills in a collaborative setting and extends these opportunities to faculty
+					and staff.
+					As a hub for idea exchange, resource optimization and networking with university and industry
+					experts, CAPS
+					drives research, job readiness and leadership development to empower individuals to tackle societal
+					challenges.
+				</p>
+			</div>
+
+			<!-- Right Vision + Mission -->
+			<div class="w-full md:w-1/2 flex flex-col items-center text-center gap-4">
+				<div class="px-4 sm:px-8">
+					<h1 class="lg:text-xl sm:text-2xl font-bold">Vision</h1>
+					<p class="text-sm sm:text-base">Our vision is to be a benchmark in global academic circles in providing professional and academic-based solutions to in-house as well as external patrons.</p>
+				</div>
+				<div class="px-4 sm:px-8">
+					<h1 class="lg:text-xl sm:text-2xl font-bold">Mission</h1>
+					<p class="text-sm sm:text-base">Our mission is to provide a shared platform for the entire
+						university to
+						exchange knowledge and experience, in order to harness expertise in the academic as well as
+						professional
+						spheres.</p>
+				</div>
+			</div>
+		</div>
+
+		    <!-- Campus Section -->
+            <div id="campuses" class="text-white border-t-2 border-gray-200 mt-6 px-2 sm:px-4 py-3">
+                <div class="max-w-7xl mx-auto">
+                    <h1 class="text-xl md:text-2xl font-heading font-bold text-center mb-3">CAMPUS NETWORK</h1>
+                    <div class="overflow-hidden sm:overflow-visible relative">
+                        <div id="campus-container" class="grid grid-cols-3 lg:grid-cols-6 overflow-hidden"></div>
+                    </div>
+                </div>
+            </div>
+		</div>
+
+        </div>
+
+        <!-- Services Section -->
+        <div id="services" class="flex h-auto lg:h-screen py-8 sm:py-1 lg:py-0 lg:pt-0 items-center justify-center text-white text-3xl md:snap-start bg-[url(https://drive.google.com/thumbnail?id=1QoqHpKCkIGEC_ecC1nQ4NIiV60SJHBgA&sz=s800)] bg-cover px-4 sm:px-4 lg:px-32 ">
+        <div class="grid grid-cols-3 lg:grid-cols-3 gap-2 lg:gap-4 overflow-hidden scroll-smooth" style="-webkit-overflow-scrolling: touch;">
+
+        <!-- Title Card -->
+        <div class="group hover:scale-[0.99] ease-in-out aspect-[16/9] bg-[#223260]/20 backdrop-blur-xl rounded-lg shadow-lg p-6 sm:p-10 flex items-center justify-center overflow-hidden relative transition-transform duration-500 w-full">
+            <h3 class="text-[#f9d877] ease-in-out leading-[1.1] font-bold text-base sm:text-lg md:text-2xl lg:text-4xl font-[Poppins] transition-transform duration-500 group-hover:scale-[0.96] text-center">SERVICES WE PROVIDE</h3>
+        </div>
+
+
+        <!-- Card 1: One-On-One Peer Training -->
+        <div class="group hover:scale-[0.99] ease-in-out rounded-lg shadow-lg overflow-hidden relative transition-transform duration-300 w-full aspect-[16/9]">
+            <div class="relative w-full h-full">
+                <div class="absolute inset-0 bg-[url(https://drive.google.com/thumbnail?id=10y7c2m2NX0CNxuE5fSdRKesI5y1qbyKm&sz=s800)] bg-cover ease-in-out bg-center group-hover:scale-[1.1] transition-transform duration-500 shadow-[inset_1200px_-200px_50px_10px_rgba(0,0,0,0.4)]"></div>
+                <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent"></div>
+                <div class="absolute bottom-2 left-2 right-2 lg:bottom-5 lg:left-5 lg:right-5 duration-500 ease-in-out transition-transform group-hover:scale-[0.98]">
+                    <h3 class="text-white font-bold text-[0.5rem] leading-[1.1] lg:text-xl">One-on-one Peer Training</h3>
+                    <p class="text-sm hidden lg:flex dm-sans text-white">
+                        Get personalized guidance for all your writing needs—academic or professional—from trained peer trainers.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+
+            <!-- Card 2: Group Peer Training -->
+        <div class="group hover:scale-[0.99] ease-in-out rounded-lg shadow-lg overflow-hidden relative transition-transform duration-300 w-full aspect-[16/9]">
+            <div class="relative w-full h-full">
+                <div class="absolute inset-0  ease-in-out bg-[url('https://drive.google.com/thumbnail?id=1-cj4pMxt4mBOdLd7theMmUVVdt9NhSp8&sz=s800')] bg-cover bg-center group-hover:scale-[1.1] transition-transform duration-500 shadow-[inset_1200px_-200px_50px_10px_rgba(0,0,0,0.4)]"></div>
+                <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent"></div>
+                <div class="absolute bottom-2 left-2 right-2 lg:bottom-5 lg:left-5 lg:right-5 duration-500 ease-in-out transition-transform">
+                    <h3 class="text-white font-bold text-[0.5rem] leading-[1.1] lg:text-xl">Group Peer Training</h3>
+                    <p class="text-sm hidden lg:flex dm-sans text-white">
+                        Be a part of dynamic classroom sessions to boost your academic skills and unlock your professional potential.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card 3: Connect Wide -->
+        <div class="group hover:scale-[0.99] ease-in-out rounded-lg shadow-lg overflow-hidden relative transition-transform duration-300 w-full aspect-[16/9]">
+            <div class="relative w-full h-full">
+                <div class="absolute inset-0 ease-in-out bg-[url('https://drive.google.com/thumbnail?id=1vo7Pd5wuOKXdWHNpiTdlr_t5aLLtu3wB&sz=s800')] bg-top bg-cover group-hover:scale-[1.1] transition-transform duration-500 shadow-[inset_1200px_-200px_50px_10px_rgba(0,0,0,0.4)]"></div>
+                <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent duration-500 ease-in-out transition-transform"></div>
+                <div class="absolute bottom-2 left-2 right-2 lg:bottom-5 lg:left-5 lg:right-5">
+                    <h3 class="text-white font-bold text-[0.5rem] leading-[1.1]  lg:text-xl">Connect Wide</h3>
+                    <p class="text-sm hidden lg:flex dm-sans text-white">
+                        Be a part of wing hosts events, creates a platform for essential industry interaction and conducts market studies.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+                    <!-- Card 4: Communication Lab -->
+        <div class="group hover:scale-[0.99] ease-in-out rounded-lg shadow-lg overflow-hidden relative transition-transform duration-300 w-full aspect-[16/9]">
+            <div class="relative w-full h-full">
+                <div class="absolute inset-0 ease-in-out bg-[url('https://drive.google.com/thumbnail?id=1VYxIRqzMhg2RrrYYTMNd5LmmUlUQ-GXC&sz=s800')] bg-center bg-cover group-hover:scale-[1.1] transition-transform duration-500 shadow-[inset_1200px_-200px_50px_10px_rgba(0,0,0,0.4)]"></div>
+                <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent"></div>
+                <div class="absolute bottom-2 left-2 right-2 lg:bottom-5 lg:left-5 lg:right-5 duration-500 ease-in-out transition-transform">
+                    <h3 class="text-white font-bold text-[0.5rem] leading-[1.1]  lg:text-xl">Communication Lab</h3>
+                    <p class="text-sm hidden lg:flex dm-sans text-white">
+                        Prefer to learn at your own pace? Explore flexible online modules, micro-credential courses, and workshops.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card 5: Psychometric Assessments -->
+        <div class="group hover:scale-[0.99] ease-in-out rounded-lg shadow-lg overflow-hidden relative transition-transform duration-300 w-full aspect-[16/9]">
+            <div class="relative w-full h-full">
+                <div class="absolute inset-0 ease-in-out bg-[url('https://drive.google.com/thumbnail?id=1e5jSQX7FeBpayXeQ_V_KOK77FXcSmGvR&sz=s800')] bg-cover bg-center group-hover:scale-[1.1] transition-transform duration-500 shadow-[inset_1200px_-50px_50px_10px_rgba(0,0,0,0.4)]"></div>
+                <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent"></div>
+                <div class="absolute bottom-2 left-2 right-2 lg:bottom-5 lg:left-5 lg:right-5 duration-500 ease-in-out transition-transform">
+                    <h3 class="text-white font-bold text-[0.5rem] leading-[1.1]  lg:text-xl">Psychometric Assessments</h3>
+                    <p class="text-sm hidden lg:flex dm-sans text-white">
+                        Get personalized psychometric assessments to enhance self-awareness and make smarter choices.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+
+        </div>
+        </div>
+
+        <!-- Objectives Section -->
+        <div id="objectives" class="h-auto lg:h-screen py-10 px-4 flex items-center justify-center md:snap-start bg-[url(https://drive.google.com/thumbnail?id=14ISQsizPfdc6UeGGLcT0ZTGzhniNbf5-&sz=s800)] bg-cover">
+			<div class="bg-white/10 backdrop-blur-lg shadow-lg p-6 md:p-10 lg:p-12 rounded-2xl border border-gray-200 max-w-5xl">
+				<h1 class="font-bold text-3xl md:text-xl text-gray-800">Objectives</h1>
+				<ul class="list-disc dm-sans pl-0 lg:pl-5 space-y-4 mt-2 lg:mt-6 text-base md:text-lg text-gray-700">
+					<li>
+						To promote the spirit of volunteering through peer training and service initiatives.
+					</li>
+					<li>
+						To create awareness on the importance of academic and professional skills for excellence in
+						academia and professional workspaces.
+					</li>
+					<li>
+						To provide academic and professional support which empowers students in areas of academic
+						writing, research formatting, professional submissions, placements preparation, and managerial
+						presentations.
+					</li>
+					<li>
+						To complement and fill the gaps in the existing curriculum and provide required help for the
+						holistic growth of individuals and making them career ready.
+					</li>
+					<li>
+						To provide effective channels of interaction using the existing resources and harnessing
+						expertise (dynamism of the student community and experience & competence of the teaching
+						fraternity) to share and communicate knowledge.
+					</li>
+					<li>
+						To transform traditional classroom learning set-up into an interactive, personalised, 24×7
+						learning system.
+					</li>
+				</ul>
+			</div>
+        </div>
+
+        <!-- Testimonials Section -->
+        <div id="testimonials" class="h-auto lg:h-screen text-white text-3xl md:snap-start bg-[url(https://drive.google.com/thumbnail?id=1kNIGiAFKPdSXBf__SbICDX6yiGvM6xwN&sz=s800)] bg-cover">
+            <div class="lg:py-28 sm:py-10 px-4 sm:px-6 md:px-12 lg:px-20 space-y-1">
+                <!-- Alumni Carousel -->
+                <div class="w-full max-w-7xl mx-auto">
+                    <h1 class="text-center text-[#223260] font-bold font-[Poppins] tracking-tighter text-lg sm:text-xl lg:text-2xl mb-2">Our Alumni</h1>
+                    <div class="w-full overflow-hidden">
+                        <div class="relative flex items-center">
+                            <div class="slider relative h-[200px] flex items-center justify-center overflow-hidden mx-auto">
+                                <div class="slide-track space-x-6" id="alumni-carousel"></div>
+                            </div>
+                        </div>
+                    </div>
+        
+                    <!-- Volunteer Carousel -->
+                    <div class="w-full max-w-6xl mx-auto overflow-hidden">
+                        <h1 class="text-center text-[#223260] font-bold font-[Poppins] tracking-tighter text-lg sm:text-xl lg:text-2xl">Testimonials</h1>
+                        <div class="relative flex items-center justify-center">
+                            <!-- Previous Button -->
+                            <button id="volunteer-prev"
+                            class="absolute hidden cursor-pointer md:flex lg:flex left-0 z-10">
+                                <ion-icon
+                                    class="ml-2 p-2 bg-white/70 text-gray-800 backdrop-blur-md border border-gray-300 rounded-full shadow hover:bg-white transition duration-300"
+                                    name="chevron-back-outline">
+                                </ion-icon>
+                            </button>
+
+                            <!-- Carousel Wrapper -->
+                            <div id="volunteer-wrapper" class="overflow-hidden w-full rounded-xl mx-1 lg:mx-12">
+                                <div id="volunteer-carousel"
+                                    class="flex transition-transform duration-700 ease-in-out rounded-xl">
+                                    <!-- Volunteer slides inserted here -->
+                                </div>
+                            </div>
+
+                            <!-- Next Button -->
+                            <button id="volunteer-next"
+                            class="absolute hidden cursor-pointer md:flex lg:flex right-0 z-10">
+                            <ion-icon
+                                class="mr-2 p-2 bg-white/70 text-gray-800 backdrop-blur-md border border-gray-300 rounded-full shadow hover:bg-white transition duration-300"
+                                name="chevron-forward-outline">
+                            </ion-icon>
+                            </button>
+
+                        </div>
+                    </div>
+                      
+                </div>
+            </div>
+        </div>
+
+        <!-- Contact Section -->
+        <div id="contact" class="h-auto lg:h-screen py-10 flex items-center justify-center text-white text-3xl md:snap-start bg-[url(https://drive.google.com/thumbnail?id=1p7ToWJrv9m8PjZ_Yi0FPwQ8AzHhRJG5J&sz=s800)] bg-cover">
+                <div class="max-w-7xl mx-auto">
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-2 sm:gap-2 lg:gap-8 px-4 sm:px-6">
+                        <!-- Contact Form -->
+                        <div>
+                            <h2 class="text-lg sm:text-xl lg:text-3xl text-[#223260]  font-[Poppins] tracking-tighter font-semibold">Contact Us</h2>
+                            <p class="text-base sm:text-lg mb-2 text-[#3D5993] leading-relaxed">
+                                We’d love to hear from you. Whether you have questions, feedback, or just want to say hello, our team is here to help.
+                            </p>
+                            <form class="font-[Poppins] space-y-2">
+                                <div>
+                                    <label for="name" class="block text-gray-900 text-sm lg:text-base font-medium">Your Name</label>
+                                    <input type="text" id="name" class="text-[#161B33] bg-gray-50/50 backdrop-blur-[30px] border-2 border-gray-300 text-base rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2" />
+                                </div>
+                                <div>
+                                    <label for="email" class="block text-sm lg:text-base font-medium text-gray-900">Your Email</label>
+                                    <input type="email" id="email" class="text-[#161B33] bg-gray-50/50 backdrop-blur-[30px] border-2 border-gray-300 text-base rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2" />
+                                </div>
+                                <div>
+                                    <label for="message" class="block text-sm lg:text-base font-medium text-gray-900">Your Message</label>
+                                    <textarea id="message" rows="4" class="block p-2 w-full text-sm text-gray-900 bg-gray-50/50 backdrop-blur-[30px] rounded-lg border-2 border-gray-300 focus:ring-blue-500 focus:border-blue-500" placeholder="Write your thoughts here..."></textarea>
+                                </div>
+                                <button type="submit" class="bg-gray-900/90 backdrop-blur-sm hover:bg-gray-900 px-6 py-2 text-white rounded transition text-lg">Send Message</button>
+                            </form>
+                        </div>
+            
+                        <!-- Map and Campus Selection -->
+                        <div>
+                            <h2 class="text-lg sm:text-xl lg:text-3xl text-[#223260] font-[Poppins] tracking-tighter font-semibold mb-2">Our Locations</h2>
+                            <select id="campus" class="bg-gray-50/50 backdrop-blur-[30px] border-2 border-gray-300 text-gray-900 text-xs sm:text-sm lg:text-base rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2">
+                                <option selected>Central Campus</option>
+                                <option>Bannerghatta Road Campus</option>
+                                <option>Yeshwanthpur Campus</option>
+                                <option>Kengeri Campus</option>
+                                <option>Delhi NCR</option>
+                                <option>Pune Lavasa</option>
+                            </select>
+                            <p class="text-gray-700 text-xs mb-1 dm-sans mt-1">Click on the blue icon in the map to show more info.</p>
+                            <div id="map" class="w-full h-[200px] sm:h-[250px] lg:h-[300px] rounded-lg shadow-lg border-[3px] border-gray-300 z-10 mt-5"></div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+
+        <footer class="bg-gray-900 text-white pt-10 pb-8 border-t-2 border-gray-700 md:snap-start">
+            <div class="max-w-7xl mx-auto px-4">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
+                    <div>
+                        <img loading="lazy"
+                            src="https://drive.google.com/thumbnail?id=1EurCCG3ucgcsmKBF4Rkcd2sGjlsKIYOE&sz=s800" />
+                        <img loading="lazy"
+                            src="https://drive.google.com/thumbnail?id=1DPyokGgfD6LIHcO3S5ZFtE-9TV5QPfXQ&sz=s800" />
+                        <div class="flex text-4xl mt-5">
+                            <a href="https://www.instagram.com/caps_christuniversity/"
+                                class="social-icon mx-2 text-white hover:text-accent-light">
+                                <ion-icon name="logo-instagram"></ion-icon>
+                            </a>
+                            <a href="https://www.facebook.com/caps.christuniversity/"
+                                class="social-icon mx-2 text-white hover:text-accent-light">
+                                <ion-icon name="logo-facebook"></ion-icon>
+                            </a>
+                            <a href="https://www.linkedin.com/company/caps-centre-for-academic-and-professional-support/?originalSubdomain=in"
+                                class="social-icon mx-2 text-white hover:text-accent-light">
+                                <ion-icon name="logo-linkedin"></ion-icon>
+                            </a>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-heading font-bold mb-2">Quick Links</h3>
+                        <ul class="space-y-1">
+                            <li><a href="#" onclick="document.getElementById('home').scrollIntoView({behavior: 'smooth'})"
+                                    class="text-gray-300 hover:text-white transition-colors">Home</a></li>
+                            <li><a href="#" onclick="document.getElementById('home').scrollIntoView({behavior: 'smooth'})"
+                                    class="text-gray-300 hover:text-white transition-colors">About</a></li>
+                            <li><a href="#"
+                                onclick="document.getElementById('services').scrollIntoView({behavior: 'smooth'})"
+                                    class="text-gray-300 hover:text-white transition-colors">Services</a>
+                            </li>
+                            <li><a href="#" onclick="document.getElementById('contact').scrollIntoView({behavior: 'smooth'})" 
+                                    class="text-gray-300 hover:text-white transition-colors">Contact</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-heading font-bold mb-2">Services</h3>
+                        <ul class="space-y-1">
+                            <li><a href="https://caps.christuniversity.in/services/writing-centre"
+                                    class="text-gray-300 hover:text-white transition-colors">Writing Centre</a></li>
+                            <li><a href="https://caps.christuniversity.in/services/peer-training"
+                                    class="text-gray-300 hover:text-white transition-colors">Classroom Sessions</a>
+                            </li>
+                            <li><a href="https://caps.christuniversity.in/services/online-learning-lab"
+                                    class="text-gray-300 hover:text-white transition-colors">Online Learning Lab</a>
+                            </li>
+                            <li><a href="https://caps.christuniversity.in/services/psychometric-assessment"
+                                    class="text-gray-300 hover:text-white transition-colors">Psychometric
+                                    Assessments</a></li>
+                            <li><a href="https://caps.christuniversity.in/services/connect-wide"
+                                    class="text-gray-300 hover:text-white transition-colors">Connect Wide</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-heading font-bold mb-2 text-gray-300">Contact</h3>
+                        <a href="mailto:caps@christuniversity.in">caps@christuniversity.in</a>
+                        <p>+91 80 4012 9728 / 9678</p>
+                        <span class="text-sm">
+                            CAPS Office, Room 910 & Room 1006,
+                            Floor 9 & 10, Central Block,
+                            CHRIST (Deemed to be University), Bangalore - 560029
+                        </span>
+                    </div>
+                </div>
+                <div class="border-t border-gray-700 pt-6 text-center">
+                    <p class="text-sm text-gray-400">
+                        © <span id="year"></span> CAPS - Centre for Academic and Professional Support. All rights reserved.
+                    </p>
+                </div>
+            </div>
+        </footer>
+    </section>
+
+      <!-- Toast Message -->
+        <div id="toast" class="fixed bottom-6 left-1/2 transform -translate-x-1/2 
+        flex items-center gap-2 px-4 py-2 rounded-lg shadow-lg opacity-0 
+        transition-opacity duration-300 pointer-events-none text-white bg-green-600 z-50">
+            <svg id="toast-icon" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+            </svg>
+            <span id="toast-message">Hello Pookies 💖</span>
+        </div>
+
+      
+    <div id="rightSidebar"
+      class="dm-sans fixed right-0 top-16 h-[95vh] mt-2 w-64 bg-gray-900/60 backdrop-blur-[30px] text-white rounded-l-2xl shadow-2xl transform translate-x-full transition-transform duration-500 ease-in-out z-50">
+      <div class="p-4">
+          <ul class="space-y-2">
+              <li>
+                  <a onclick="document.getElementById('home').scrollIntoView({behavior: 'smooth'})"
+                      class="block py-2 px-4 hover:bg-gray-600 rounded-lg transition-all duration-300 hover:pl-6">Home</a>
+              </li>
+              <li>
+                  <a onclick="document.getElementById('services').scrollIntoView({behavior: 'smooth'})"
+                      class="block py-2 px-4 hover:bg-gray-600 rounded-lg transition-all duration-300 hover:pl-6">Services</a>
+              </li>
+              <li>
+                  <a onclick="document.getElementById('objectives').scrollIntoView({behavior: 'smooth'})"
+                      class="block py-2 px-4 hover:bg-gray-600 rounded-lg transition-all duration-300 hover:pl-6">Objectives</a>
+              </li>
+              <li>
+                <a onclick="document.getElementById('testimonials').scrollIntoView({behavior: 'smooth'})"
+                    class="block py-2 px-4 hover:bg-gray-600 rounded-lg transition-all duration-300 hover:pl-6">Alumni & Testimonials</a>
+            </li>
+            <li>
+                <a onclick="document.getElementById('contact').scrollIntoView({behavior: 'smooth'})"
+                    class="block py-2 px-4 hover:bg-gray-600 rounded-lg transition-all duration-300 hover:pl-6">Contact</a>
+            </li>
+          </ul>
+      </div>
+                        
+    </div>
+
+<iframe
+  class="fixed bottom-4 right-4 w-96 h-96"
+  src="https://sridharplays.github.io/df-messenger/homepage"
+  frameborder="0"
+></iframe>
+
+
+
+		<!-- <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
+		<df-messenger chat-icon="https:&#x2F;&#x2F;cdn-icons-png.flaticon.com&#x2F;512&#x2F;4712&#x2F;4712024.png"
+		chat-title="CAPS" agent-id="ec9d89da-6e09-4d25-bb12-acfec9324eba"
+	   language-code="en"></df-messenger> -->
+
+        <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+        <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+        <script>
+
+window.addEventListener("dfMessengerLoaded", function () {
+          const dfMessengerWrapper = document.querySelector("df-messenger").shadowRoot.querySelector("df-messenger-chat").shadowRoot.querySelector(".chat-wrapper");
+
+        document.querySelector('df-messenger').shadowRoot.querySelector('.df-messenger-wrapper').querySelector('#widgetIcon').style.bottom = "2vh";
+        document.querySelector('df-messenger').shadowRoot.querySelector('.df-messenger-wrapper').style.right = "5vh";
+        
+        if(window.innerWidth <= 768) {
+          dfMessengerWrapper.style.width = "400px";
+          dfMessengerWrapper.style.height = "80vh";
+        }
+      });
+
+// Fixed Data
+		// Do not Modify! ☠️
+		// Map Coords
+		let campuses = [];
+        let volunteerData = [];
+        let alumniData = [];
+
+        async function loadContents() {   
+            const apiURL = "https://script.google.com/macros/s/AKfycbxpTN5QRGRszQAiCTNi4KB50zXfT7FMi2jab2WKlOK5WEMV3CL6ve5fTXyMKSC9yYN8Rg/exec?requested=CampusNetwork,CAPSAlumni,Testimonials";
+                
+            try {                    
+                const response = await fetch(apiURL);
+                data = await response.json();
+
+                // Campus
+                campuses = data.CampusNetwork;
+                renderCampusNetwork(campuses);
+                renderMap(campuses);
+
+                // ALumni
+                let alumniData = data.CAPSAlumni
+                renderAlumni(alumniData);
+
+                // Testimonials
+                volunteerData = data.Testimonials;
+                renderTestimonials(volunteerData);
+            } catch (error) {
+                console.error('Error Fetching Contens:', error);
+            } finally {
+                document.getElementById('loading-screen').style.display = 'none';
+            }
+        }
+
+		///////////////////////////////
+
+        const toggleSidebar = () => {
+			const sidebar = document.getElementById('rightSidebar');
+			sidebar.classList.toggle('translate-x-full');
+			sidebar.classList.toggle('translate-x-0');
+		};
+
+		document.querySelector('.menu-toggle').addEventListener('click', toggleSidebar);
+
+        document.addEventListener("DOMContentLoaded", () => {
+            AOS.init();
+
+            loadContents();
+        })
+
+        function renderCampusNetwork(campuses) {
+			const CampusContainer = document.getElementById("campus-container");
+			campuses.forEach(campus => {
+				const div = document.createElement("div");
+                const fileId = getGoogleDriveFileId(campus.ImageURL);
+                let ImageURL = '';
+                if (fileId) {
+                    ImageURL = `https://drive.google.com/thumbnail?id=${fileId}&sz=s800`;
+                }
+				div.className = "card";
+				div.style.backgroundImage = `url("${ImageURL}")`;
+
+				div.innerHTML = `
+                    <div class="card-content">
+                        <h1 class="leading-[1.1]">${campus.Name}</h1>
+                        <h1 class="font-bold -translate-y-0 lg:-translate-y-1">${campus.Location}</h1>
+                        <a  ${campus.Status === 'Publish' 
+                                ? `href="${campus.PageURL}"` 
+                                : `onclick='showToast("This campus page is currently under development. Please check back soon for updates!", "info");'`
+                            } 
+                            class="hidden-link" 
+                            style="display:none;">
+                            Go to ${campus.Name}
+                        </a>
+                    </div>
+
+                `;
+
+				div.addEventListener("click", () => {
+					const link = div.querySelector(".hidden-link");
+					if (link) link.click();
+				});
+
+				div.classList.add("shadow-[inset_10px_-50px_50px_10px_rgba(0,0,0,0.7)]");
+
+				CampusContainer.appendChild(div);
+			});
+		}
+
+        
+        // Testimonial Section
+		// === ALUMNI RENDER ==
+        function renderAlumni(alumniData) {
+			const alumniCarousel = document.getElementById("alumni-carousel");
+			alumniCarousel.innerHTML = "";
+
+			// Shuffle the data
+			const shuffled = alumniData.sort(() => Math.random() - 0.5);
+
+			// Duplicate slides for seamless scrolling
+			const displayData = [...shuffled, ...shuffled];
+
+			displayData.forEach((a) => {
+				const slide = document.createElement("div");
+				const fileId = getGoogleDriveFileId(a.ImageURL);
+				const imageURL = fileId ? `https://drive.google.com/thumbnail?id=${fileId}&sz=s800` : "https://via.placeholder.com/144";
+
+				slide.className = "min-w-[400px] flex items-center justify-center";
+				slide.innerHTML = `
+					<div class="w-full h-44 bg-white border-2 border-gray-950/20 rounded-3xl p-4 flex items-center space-x-6">
+						<img src="${imageURL}" alt="Alumni Photo" class="w-36 h-36 object-cover rounded-lg border-2 border-white" onerror="this.src='https://via.placeholder.com/144'" />
+						<div class="text-left">
+							<p class="dancing-script-font font-bold text-[#20315f] text-xl">${a.Name}</p>
+							<p class="text-[rgb(187,141,47)] font-semibold text-base leading-tight">${a.Role}<br>@ ${a.Company}<br>${a.Year}</p>
+						</div>
+					</div>
+				`;
+				alumniCarousel.appendChild(slide);
+			});
+		}
+            // === VOLUNTEER RENDER ===
+            function renderTestimonials(volunteerData) {
+                const volunteerCarousel = document.getElementById("volunteer-carousel");
+                let volunteerIndex = 0;
+
+                volunteerData.forEach((vol, i) => {
+                        const slide = document.createElement("div");
+                        const fileId = getGoogleDriveFileId(vol.ImageURL);
+                        let ImageURL = '';
+                        if (fileId) {
+                            ImageURL = `https://drive.google.com/thumbnail?id=${fileId}&sz=s800`;
+                        }
+                        slide.className = "min-w-full";
+                        slide.innerHTML = `
+                            <div class="w-full h-full lg:h-[240px] flex items-center bg-white justify-center border-2 border-gray-950/20 rounded-3xl p-6">
+                            <div class="flex flex-col lg:flex-row items-center w-full">
+                                <img src="${ImageURL}" class="h-52 w-52 object-top lg:h-48 lg:w-48 object-cover rounded-lg border-2 border-white mb-4 lg:mb-0 lg:mr-6" />
+                                <div class="text-white text-center sm:text-center md:text-center lg:text-left px-4 lg:px-0">
+                                    <p class="text-base lg:text-base text-gray-900 dm-sans">${vol.Testimonial}</p>
+                                    <p class="dancing-script-font text-[#20315f] text-xl mt-2">${vol.VolunteerName}</p>
+                                    <p class="text-[rgb(187,141,47)] uppercase text-xs font-semibold">${vol.Role} <br>${vol.Wing} <br>${vol.Campus} ${vol.Year}</p>
+                                </div>
+                            </div>
+                        </div>
+                            `;
+                        volunteerCarousel.appendChild(slide);
+                });
+
+                function showVolunteerSlide() {
+                volunteerCarousel.style.transform = `translateX(-${volunteerIndex * 100}%)`;
+            }
+
+            document.getElementById("volunteer-prev").onclick = () => {
+                volunteerIndex = (volunteerIndex - 1 + volunteerData.length) % volunteerData.length;
+                showVolunteerSlide();
+            };
+
+            document.getElementById("volunteer-next").onclick = () => {
+                volunteerIndex = (volunteerIndex + 1) % volunteerData.length;
+                showVolunteerSlide();
+            };
+
+            // Touch swipe support for volunteer carousel
+            let startX = 0;
+            volunteerCarousel.parentElement.addEventListener("touchstart", e => {
+                startX = e.touches[0].clientX;
+            });
+            volunteerCarousel.parentElement.addEventListener("touchend", e => {
+                const endX = e.changedTouches[0].clientX;
+                if (endX < startX - 50) {
+                    volunteerIndex = (volunteerIndex + 1) % volunteerData.length;
+                } else if (endX > startX + 50) {
+                    volunteerIndex = (volunteerIndex - 1 + volunteerData.length) % volunteerData.length;
+                }
+                showVolunteerSlide();
+            });
+
+            // Auto-slide volunteer every 10 seconds
+            setInterval(() => {
+                volunteerIndex = (volunteerIndex + 1) % volunteerData.length;
+                showVolunteerSlide();
+            }, 17000);
+            }
+
+
+
+        function renderMap() {
+            // Initialize map
+            const map = L.map('map').setView([12.934269, 77.605644], 15);
+
+            L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                maxZoom: 19,
+                attribution: '© OpenStreetMap',
+            }).addTo(map);
+
+            campuses.forEach(campus => {
+                // Convert coordinates string to [lat, lng] array
+                const coords = campus.Coordinates.split(',').map(Number);
+
+                const fileIdMatch = campus.ImageURL.match(/\/d\/([^/]+)\//);
+                const imageId = fileIdMatch ? fileIdMatch[1] : '';
+                const thumbnailURL = imageId
+                    ? `https://drive.google.com/thumbnail?id=${imageId}&sz=s800`
+                    : '';
+
+                L.marker(coords).addTo(map).bindPopup(`
+                    <div class="text-center">
+                        ${thumbnailURL ? `<img loading="lazy" src="${thumbnailURL}" class="mx-auto aspect-square object-cover card max-w-28 h-28" />` : ''}
+                        <strong>${campus.Name}</strong><br>
+                        ${campus.OfficeAddress}
+                    </div>
+                `);
+                
+                // Store parsed coordinates for later use
+                campus._parsedCoords = coords;
+            });
+
+            // Set initial view to the first campus
+            if (campuses.length > 0 && campuses[0]._parsedCoords) {
+                map.setView(campuses[0]._parsedCoords, 15);
+            }
+
+            // Maps Events
+            const campusSelect = document.getElementById("campus");
+            campusSelect.addEventListener("change", (e) => {
+                const selected = e.target.value;
+                const selectedCampus = campuses.find(campus => campus.Name === selected);
+                if (selectedCampus && selectedCampus._parsedCoords) {
+                    map.setView(selectedCampus._parsedCoords, 15);
+                }
+            });
+        }
+
+        function showToast(message, type = 'success') {
+            const toast = document.getElementById('toast');
+            const toastMessage = document.getElementById('toast-message');
+            const toastIcon = document.getElementById('toast-icon');
+
+            // Set message
+            toastMessage.textContent = message;
+
+            // Configure styles based on type
+            switch (type) {
+                case 'success':
+                    toast.className = baseToastClasses + ' bg-green-600';
+                    toastIcon.innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />`;
+                    break;
+                case 'error':
+                    toast.className = baseToastClasses + ' bg-red-600';
+                    toastIcon.innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />`;
+                    break;
+                case 'info':
+                    toast.className = baseToastClasses + ' bg-blue-600';
+                    toastIcon.innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M12 20a8 8 0 100-16 8 8 0 000 16z" />`;
+                    break;
+                default:
+                    toast.className = baseToastClasses + ' bg-gray-600';
+            }
+
+            // Show toast
+            toast.classList.remove('opacity-0', 'pointer-events-none');
+            toast.classList.add('opacity-100');
+
+            // Hide toast after 3 seconds
+            setTimeout(() => {
+                toast.classList.remove('opacity-100');
+                toast.classList.add('opacity-0');
+            }, 3000);
+        }
+
+        // Base class string
+        const baseToastClasses = "fixed bottom-6 left-1/2 transform -translate-x-1/2 flex items-center gap-2 px-4 py-2 rounded-lg shadow-lg transition-opacity duration-300 pointer-events-none text-white z-50";
+
+
+
+		const logoContainer = document.getElementById('logo');
+
+		const logoWhite = `<img loading="lazy" id="logo-img" data-aos="fade-left" data-aos-duration="500" src="https://drive.google.com/thumbnail?id=1L5tjhxM0vrQrV43l8Wdxa3ZiUTC-lQnp&sz=s800" class="h-8" alt="Logo" />`;
+
+		const logoBlue = `<img loading="lazy" id="logo-img" data-aos="fade-left" data-aos-duration="500" src="https://drive.google.com/thumbnail?id=1qz_Dr1BPdr5ygZzIToesHC05IkNGTYJd&sz=s800" class="h-12 object-cover w-52" alt="Logo" />`;
+
+		let currentLogo = ''; // '', 'white', or 'blue'
+		let fadeTimeout;
+
+		document.getElementById('main').addEventListener('scroll', () => {
+			const scrollY = document.getElementById('main').scrollTop;
+
+			if (scrollY > 699 && currentLogo !== 'blue') {
+				updateLogo(logoBlue, 'blue');
+			} else if (scrollY > 130 && scrollY <= 599 && currentLogo !== 'white') {
+				updateLogo(logoWhite, 'white');
+			} else if (scrollY <= 130 && currentLogo !== '') {
+				fadeOutLogo();
+			}
+		});
+
+		function updateLogo(html, type) {
+			clearTimeout(fadeTimeout);
+			logoContainer.innerHTML = html;
+			AOS.init({ once: true });
+			currentLogo = type;
+		}
+
+		function fadeOutLogo() {
+			const img = document.getElementById('logo-img');
+			if (img) {
+				img.classList.add('fade-out');
+				fadeTimeout = setTimeout(() => {
+					logoContainer.innerHTML = '';
+					currentLogo = '';
+				}, 500);
+			}
+		}
+
+		function getGoogleDriveFileId(url) {
+			const regex = /(?:\/d\/|id=|\/file\/d\/|open\?id=)([a-zA-Z0-9_-]{10,})/;
+			const match = url.match(regex);
+			return match ? match[1] : null;
+		}
+
+        </script>
+
+</body>
+</html>
